@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+{# /* <style>
+    .example-wrapper {
+        margin: 1em auto;
+        max-width: 800px;
+        width: 95%;
+        font: 18px/1.5 sans-serif;
+    }
+
+    .example-wrapper code {
+        background: #F5F5F5;
+        padding: 2px 6px;
+    }
+</style> */ #}
+
+{# <div class="example-wrapper">
+    <h3>Hello {{ controller_name }}! ✅</h3>
+</div> #}
+{# creer un tableau users #}
+{# {% set users = ["alin","mans","playboy"] %} #}
+{# notre boucle for dont user prend les valeur de users #}
+{# <p>{% for user in users %}</p>
+{{user}}
+{% endfor %} #}
+
+{# pour les date #}
+{# {{"now"|date("d/m/y","Europe/Paris")}}
+
+{% set name = "moi" %}
+{{name}}
+
+{% set number = 1988 %}
+{{number}} #}
+{# on a inclu une ni #}
+{# {% include 'home/myinclude.html.twig' %} #}
+{# on veut afficher notre tableau associatif ici en forme de card #}
+{# <div class="d-flex flex-wrap w-5">
+
+    {% for articles in article1 %}
+    <div class="card" style="width: 18rem;">
+
+        <img src="{{articles.image}}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <p class="card-text">{{articles.title}}</p>
+            {# <p class="card-text">{{articles.content}}</p> #}
+            {#
+        </div>
+    </div>
+    {% endfor %}
+</div>
+#}
+
+{# formateur #}
+
+<div class="d-flex justify-content-evenly">
+    <div class="row">
+        {% for article in articles %}
+        <div class="card col-md-4 ml-4 mt-4" style="width: 18rem;">
+            <p class="date">{{ article.createdAt | date("d/m/y")}}</p>
+            {# le chemin pour afficher l'image #}
+            <img src="{{ asset('/images/articles/' ~ article.image) }}" class="card-img-top" alt="{{ article.title }}">
+            <div class="card-body">
+                <h5 class="card-title"> {{article.title }}</h5>
+                {# avec la méthode path 'show', le nom de la méthode, {'id' est la clé, c'est comme ça : article.id, ce qui sera envoyé dans la méthode})}}" #}
+                <a href="{{path('show', {'id': article.id})}}" class="btn btn-primary">En Savoir plus</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="category">
+        <h3>Catégories</h3>
+        {% for categorie in categories %}
+            
+            <div>
+                <a href="{{path('app_home', {'id': categorie.id})}}"><h5 class="card-title"> {{categorie.title }}</h5></a>
+                
+            </div>
+            
+        {% endfor %}
+       
+        
+        
+    </div>
+</div>
+
+
+{% endblock %}
